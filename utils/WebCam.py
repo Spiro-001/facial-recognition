@@ -50,14 +50,15 @@ class WebCam:
                             )[mask]
 
                             img = cv2.imread(
-                                "F:/python/faceMe/dev/test/daniel/daniel.jpg", 1
+                                f"F:/python/faceMe/dev/test/{self.people_info}/{self.people_info}.jpg",
+                                1,
                             )
-                            img = imutils.resize(img, width=300)
-                            self.frame[220:340, 870:990] = img[20:140, 90:210]
+                            img = imutils.resize(img, width=140, height=140)
+                            self.frame[210:350, 860:1000] = img[0:140, 0:140]
 
                             cv2.putText(
                                 self.frame,
-                                "daniel",
+                                self.people_info,
                                 [800, 200],
                                 cv2.FONT_HERSHEY_DUPLEX,
                                 1,
@@ -103,8 +104,8 @@ class WebCam:
     def getFPS(self):
         return self.video.get(cv2.CAP_PROP_FPS)
 
-    def render_info(self, person, xy_start, xy_end):
-        self.people_info[person] = {"xy_s": xy_start, "xy_e": xy_end}
+    def render_info(self, person):
+        self.people_info = person
 
     def reset_info(self):
         self.people_info = {}
